@@ -37,9 +37,7 @@ y=np.array(dfs.iloc[0:,2])
 
 
 
-
-print("Before removal of outliers")
-print("_________#####_____________")
+print("___Activity on Data Visualisation___")
 
 meanx=np.mean(x)
 print("Mean of x data",meanx)
@@ -77,7 +75,8 @@ plt.show()
 #since much of the data lies in the centre i.e 150/170 points lie at the centre therefore
 #It would be better if we consider Median rather than mean ,since we have 20 outliers here
 #Here in our case these outliers are far from the centre ,so we will consider Median
-
+# Here if we consider even mean also it doesnot effect much ,since we have more points concentrated near centre
+#Here iam considering median as the feature 
 baseradius=dist(medianx,mediany)
 print("Our New Base Location should be  X= ",medianx," Y=",mediany,",to gain max customers")   
 print("\n")
@@ -139,7 +138,7 @@ plt.scatter(tcustx,tcusty)
 plt.show()
 
 
-"""
+                                    
 #Manual removal of Outliers
 ya=[]
 yb=[]
@@ -169,4 +168,3 @@ print("Median of Y after removal of outliers",mediany)
 plt.figure(3)
 plt.scatter(ya,yb)
 plt.show()
-"""
