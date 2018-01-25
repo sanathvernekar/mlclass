@@ -7,6 +7,7 @@ Created on Wed Jan 24 17:47:43 2018
 
 import numpy as np
 import pandas as pd
+import os
 import matplotlib.pyplot as plt
 
 def dist(x,y):
@@ -33,7 +34,10 @@ x=np.array(dfs.iloc[0:,1])
 y=np.array(dfs.iloc[0:,2])
 #print(len(y))
 
-
+print("Initial Plot of Customer Distribution")
+plt.figure(1)
+plt.scatter(x,y)
+plt.show()
 
 
 
@@ -68,10 +72,7 @@ print("\n")
 
 
 
-print("Initial Plot of Customer Distribution")
-plt.figure(1)
-plt.scatter(x,y)
-plt.show()
+
 #since much of the data lies in the centre i.e 150/170 points lie at the centre therefore
 #It would be better if we consider Median rather than mean ,since we have 20 outliers here
 #Here in our case these outliers are far from the centre ,so we will consider Median
@@ -80,11 +81,14 @@ plt.show()
 baseradius=dist(medianx,mediany)
 print("Our New Base Location should be  X= ",medianx," Y=",mediany,",to gain max customers")   
 print("\n")
+
+temp=dist((medianx),(mediany))
+print("Distance from initial location to New base location is",temp)
+
+#Retaining Maximum Customers within redius of 2 km
 custx=[]
 custy=[]
 clist=[]
-temp=dist((medianx),(mediany))
-print("Distance from initial location to New base location is",temp)
 #myarr=[]
 print("\n")
 l=len(x)
@@ -111,31 +115,37 @@ custx=np.array(custx)
 custy=np.array(custy)
 #myarr=np.array(myarr)
 
-
-
-df=pd.DataFrame(clist)
-df.to_excel("Activity_1_Retain.xlsx", sheet_name='Retained Customers',index=False)
-
-df=pd.DataFrame(tcust)
-df.to_excel("Activity_1_Transfer.xlsx", sheet_name='Transferred Customers',index=False)
-
-
-print("Retained Customers Graph")
+print("Retained Customers plot")
 plt.figure(2)
 plt.scatter(custx,custy)
 plt.show()
 
-print("transferred Customers Plot")
+
 tcustx=[]
 tcusty=[]
 for i in range(tcustlen):
     
     tcustx.append(x[tcust[i]-1])
     tcusty.append(y[tcust[i]-1])
-
+print("transferred Customers Plot")
 plt.figure(3)
 plt.scatter(tcustx,tcusty)
 plt.show()
+
+
+
+df=pd.DataFrame(clist)
+try:
+    df.to_excel("Activity_1_Retain.xlsx", sheet_name='Retained Customers',index=False)
+    print("Activity_1_Retain.xlsx file is successfully saved in ",os.getcwd(),"directory")
+except:
+    print("Could not save file")
+df=pd.DataFrame(tcust)
+try:
+    df.to_excel("Activity_1_Transfer.xlsx", sheet_name='Transferred Customers',index=False)
+    print("Activity_1_Transfer.xlsx file is successfully saved in ",os.getcwd(),"directory")
+except:
+    print("Could not save file")
 
 
 
