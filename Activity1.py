@@ -138,6 +138,8 @@ plt.scatter(tcustx,tcusty)
 plt.show()
 
 
+
+"""
                                     
 #Manual removal of Outliers
 ya=[]
@@ -168,3 +170,4 @@ print("Median of Y after removal of outliers",mediany)
 plt.figure(3)
 plt.scatter(ya,yb)
 plt.show()
+"""
